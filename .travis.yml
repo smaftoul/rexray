@@ -114,17 +114,14 @@ jobs:
           skip_cleanup:   true
           on:
             all_branches: true
-            condition:    $DEPLOY_BINTRAY != 0 && $TRAVIS_TAG =~ ^$ && ($TRAVIS_REPO_SLUG = 'rexray/rexray' || $IGNORE_REPO_SLUG_CONDITION = true) && ($TRAVIS_BRANCH = master || $IGNORE_BRANCH_CONDITION = true)
         - <<: *deploy-to-bintray
           file:           bintray-staged.json
           on:
             all_branches: true
-            condition:    $DEPLOY_BINTRAY != 0 && $TRAVIS_TAG =~ -rc[[:digit:]]+$ && ($TRAVIS_REPO_SLUG = 'rexray/rexray' || $IGNORE_REPO_SLUG_CONDITION = true)
         - <<: *deploy-to-bintray
           file:           bintray-stable.json
           on:
             all_branches: true
-            condition:    $DEPLOY_BINTRAY != 0 && $TRAVIS_TAG =~ ^v?[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]$ && ($TRAVIS_REPO_SLUG = 'rexray/rexray' || $IGNORE_REPO_SLUG_CONDITION = true)
 
     - <<: *deploy-stage
       env: PROG=rexray XGOARCH=arm
